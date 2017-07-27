@@ -45,12 +45,11 @@
             }
         }
 
-        public async Task<IEnumerable<T>> GetItemsAsync(string partitionKey, Expression<Func<T, bool>> predicate)
+        public async Task<IEnumerable<T>> GetItemsAsync(string partitionKey)
         {
             IDocumentQuery<T> query = this.client.CreateDocumentQuery<T>(
                 UriFactory.CreateDocumentCollectionUri(this.DatabaseId, this.CollectionId),
                 new FeedOptions { MaxItemCount = -1 })
-                .Where(predicate)
                 .AsDocumentQuery();
 
             List<T> results = new List<T>();

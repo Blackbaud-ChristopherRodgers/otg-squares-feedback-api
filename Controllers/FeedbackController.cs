@@ -35,7 +35,7 @@ namespace FeedbackAPI.Controllers
         {
             return new FeedbackCollection()
             {
-                Records = await repository.GetItemsAsync(productId, f => string.IsNullOrWhiteSpace(f.Id))
+                Records = await repository.GetItemsAsync(productId)
             };
         }
 
