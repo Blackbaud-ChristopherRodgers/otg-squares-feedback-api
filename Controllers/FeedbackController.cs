@@ -45,16 +45,16 @@ namespace FeedbackAPI.Controllers
             return await repository.GetItemAsync(productId, id);
         }
 
-        [HttpPut("{id}")]
-        public async Task<Document> Put(string id, [FromBody]Feedback value)
+        [HttpPut("products/{productId}/{id}")]
+        public async Task<Document> Put(string productId, string id, [FromBody]Feedback value)
         {
-            return await repository.UpdateItemAsync(id, value);
+            return await repository.UpdateItemAsync(productId, id, value);
         }
 
-        [HttpDelete("{id}")]
-        public async Task Delete(string id)
+        [HttpDelete("products/{productId}/{id}")]
+        public async Task Delete(string productId, string id)
         {
-            await repository.DeleteItemAsync(id);
+            await repository.DeleteItemAsync(productId, id);
         }
     }
 }

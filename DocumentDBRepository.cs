@@ -66,14 +66,20 @@
             return await this.client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(this.DatabaseId, this.CollectionId), item);
         }
 
-        public async Task<Document> UpdateItemAsync(string id, T item)
+        public async Task<Document> UpdateItemAsync(string partitionKey, string id, T item)
         {
-            return await this.client.ReplaceDocumentAsync(UriFactory.CreateDocumentUri(this.DatabaseId, this.CollectionId, id), item);
+            return await this.client.ReplaceDocumentAsync(UriFactory.CreateDocumentUri(this.DatabaseId, this.CollectionId, id), item, new RequestOptions()
+            {
+                PartitionKey = new PartitionKey(partitionKey)
+            });
         }
 
-        public async Task DeleteItemAsync(string id)
+        public async Task DeleteItemAsync(string partitionKey, string id)
         {
-            await this.client.DeleteDocumentAsync(UriFactory.CreateDocumentUri(this.DatabaseId, this.CollectionId, id));
+            await this.client.DeleteDocumentAsync(UriFactory.CreateDocumentUri(this.DatabaseId, this.CollectionId, id), new RequestOptions()
+            {
+                PartitionKey = new PartitionKey(partitionKey)
+            });
         }
     }
 }

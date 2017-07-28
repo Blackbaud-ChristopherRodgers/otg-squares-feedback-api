@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace FeedbackAPI.Models
 {
-    public class FeedbackCollection
+    public class NoteCollection
     {
         [JsonProperty(PropertyName = "records")]
-        public IEnumerable<Feedback> Records { get; set; }
+        public IEnumerable<Note> Records { get; set; }
     }
 }
